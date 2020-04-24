@@ -1,0 +1,21 @@
+{
+    "name": "rnevarezc/postal",
+    "description": "Postal API Client",
+    "type": "library",
+    "require": {
+        "php": "^7.2",
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Rafael Nevarez"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Postal\\": "src/"
+        }
+    }
+}
