@@ -9,5 +9,5 @@ Uses [GuzzleHTTP](https://github.com/guzzle/guzzle) client and PSR-7: [HTTP mess
 Install the library using [Composer](https://getcomposer.org/):
 
 ```bash
-composer require guzzlehttp/guzzle
+composer require rnevarezc/postal
 ```
