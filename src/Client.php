@@ -7,7 +7,9 @@ namespace Postal;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
-use Postal\Message\MessageInterface as Message;
+use Psr\Http\Message\ResponseInterface;
+use Postal\Mail\Mailable as Message;
+use Postal\Response\Response;
 
 class Client
 {
@@ -42,7 +44,9 @@ class Client
     public function __construct(string $host, string $apiKey, array $headers = [])
     {
         $this->setHost($host);
+
         $this->setApiKey($apiKey);
+
         $this->setHeaders($headers);
     }
 
@@ -131,17 +135,20 @@ class Client
      * @throws RequestException If something happened
      * @return Response
      */
-    protected function performRequest(string $resource, string $action, array $payload) : Response
-    {
+    protected function performRequest(
+        string $resource, 
+        string $action, 
+        array $payload
+    ) : ResponseInterface {
         $http = new HttpClient();
         
-        return new Response($http->send(
+        return $http->send(
             $this->getRequest($this->getUri($resource, $action), $payload)
-        ));
+        );
     }
 
     /**
-     * Send Endpoint.
+     * Send a Message.
      *
      * @param array $payload
      * @param string $action
@@ -149,8 +156,47 @@ class Client
      */
     public function send(Message $message) : Response
     {
-        $response = $this->performRequest('send', 'message', $message->getAttributes());
+        $response = new Response(
+            $this->performRequest(
+                'send', $message->getType(), $message->getAttributes()
+            )
+        );
+
         $message->setResponse($response);
+
+        return $response;
+    }
+
+    /**
+     * Get the Message Details from the Server.
+     *
+     * @param integer $id
+     * @param array|bool $extra
+     * @return Response
+     */
+    public function getMessageDetails(int $id, $extra = ['status', 'details']) : Response
+    {
+        $response = new Response(
+            $this->performRequest('messages', 'message', [
+                'id' => $id,
+                '_expansions' => $extra
+            ])
+        );
+
+        return $response;
+    }
+
+    /**
+     * Get the Message Deliveries from the Server.
+     *
+     * @param integer $id
+     * @return Response
+     */
+    public function getMessageDeliveries(int $id) : Response
+    {
+        $response = new Response(
+            $this->performRequest('messages', 'deliveries', ['id' => $id])
+        );
 
         return $response;
     }

@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Postal\Message;
+namespace Postal\Mail;
 
-use Postal\Client;
-use Postal\Response;
+use Postal\Response\Response;
 
-interface MessageInterface
+interface Mailable
 {
     /**
      * Get attributes for payload.

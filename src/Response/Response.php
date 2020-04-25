@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Postal;
+namespace Postal\Response;
 
 use JsonSerializable;
 use Postal\Exceptions\InvalidRequestException;
@@ -14,9 +14,9 @@ class Response implements JsonSerializable
 
     protected $time;
 
-    protected $messageId;
+    protected $flags;
 
-    protected $messages;
+    protected $data;
 
     /**
      * Default Constructor
@@ -30,6 +30,18 @@ class Response implements JsonSerializable
         $this->assert($payload);
 
         $this->fill($payload);
+
+        $this->parseData();
+    }
+
+    /**
+     * Parse the Data provided in the API Response
+     *
+     * @return void
+     */
+    protected function parseData()
+    {
+        
     }
 
     /**
@@ -51,37 +63,30 @@ class Response implements JsonSerializable
         }
     }
 
-    public function getMessageId()
-    {
-        return $this->messageId;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
+    /**
+     * Fill the instance with the provided Payload
+     *
+     * @param array $payload
+     * @return void
+     */
     protected function fill(array $payload)
     {
         $this->status = $payload['status'];
         $this->time = $payload['time'];
-
-        $this->messageId = $payload['data']['message_id'];
-        $this->messages = $payload['data']['messages'];
+        $this->flags = $payload['flags'];
+        $this->data = $payload['data'];
     }
 
-    public function getRecipients() : array
-    {
-        return $this->messages;
-    }
-
+    /**
+     * @inheritDoc
+     */
     public function jsonSerialize()
     {
         return [
             'status' => $this->status,
             'time' => $this->time,
-            'messageId' => $this->messageId,
-            'messages' => $this->messages
+            'flags' => $this->flags,
+            'data' => $this->data,
         ];
     }
 }
