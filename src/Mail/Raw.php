@@ -23,6 +23,11 @@ class Raw implements Mailable
         'bounce' => false,
     ];
 
+    /**
+     * Default Constructor
+     *
+     * @param array $attributes
+     */
     public function __construct(array $attributes = [])
     {  
         $this->setAttributes($attributes);

@@ -21,14 +21,17 @@ class Client
     protected $host;
 
     /**
-     * The api-key
+     * The API token for a server that you wish to authenticate with.
      *
      * @var string
      */
     protected $apiKey;
 
     /**
-     * Additional headers for the Request
+     * Additional headers for the HTTP Request
+     * 
+     * This is useful if you need to send any other authentication headers
+     * for your own endpoint. (Basic, Bearer, etc)
      *
      * @var array
      */
@@ -94,6 +97,7 @@ class Client
      */
     protected function getHeaders() : array
     {
+        // The default headers needed by the Postal API.
         $default = [
             'x-server-api-key' => $this->apiKey,
             'content-type' => 'application/json',
@@ -103,7 +107,7 @@ class Client
     }
 
     /**
-     * Get the Request to send to the Endpoint
+     * Get the PSR7 Request to send to the Endpoint
      * 
      * @param string $uri
      * @param Mail $mail
@@ -115,7 +119,7 @@ class Client
     }
 
     /**
-     * Get the api uri.
+     * Get the API uri.
      *
      * @param string $resource
      * @param string $action
@@ -127,7 +131,7 @@ class Client
     }
 
     /**
-     * Send the request to the Endpoint
+     * Perform the request to the API
      *
      * @param string $resource
      * @param string $action
