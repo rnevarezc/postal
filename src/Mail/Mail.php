@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Postal\Mail;
 
-use Postal\Mail\Concerns\{HasAttributes, HasResponse};
+use Postal\Mail\Concerns\{HasAttributes, HasMessages, HasResponse};
 
 class Mail implements Mailable
 {
     use HasResponse;
     use HasAttributes;
+    use HasMessages;
 
     /**
      * Default attributes

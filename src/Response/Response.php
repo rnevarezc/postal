@@ -114,6 +114,16 @@ class Response implements JsonSerializable
     }
 
     /**
+     * Get the data of the Response
+     *
+     * @return array
+     */
+    public function getData() : array
+    {
+        return $this->data;
+    }
+
+    /**
      * @inheritDoc
      */
     public function jsonSerialize()
