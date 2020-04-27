@@ -1,0 +1,26 @@
+{
+  "original_message":{
+    "id":12345,
+    "token":"abcdef123",
+    "direction":"outgoing",
+    "message_id":"5817a64332f44_4ec93ff59e79d154565eb@app34.mail",
+    "to":"test@example.com",
+    "from":"sales@awesomeapp.com",
+    "subject":"Welcome to AwesomeApp",
+    "timestamp":1477945177.12994,
+    "spam_status":"NotSpam",
+    "tag":"welcome"
+  },
+  "bounce":{
+    "id":12347,
+    "token":"abcdef124",
+    "direction":"incoming",
+    "message_id":"5817a64332f44_4ec93ff59e79d154565eb@someserver.com",
+    "to":"abcde@amrp.appmail.io",
+    "from":"postmaster@someserver.com",
+    "subject":"Delivery Error",
+    "timestamp":1477945179.12994,
+    "spam_status":"NotSpam",
+    "tag":null
+  }
+}

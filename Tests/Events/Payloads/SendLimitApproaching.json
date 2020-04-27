@@ -1,0 +1,10 @@
+{
+  "server":{
+    "uuid":"54529725-8807-4069-ab29-a3746c1bbd98",
+    "name":"AwesomeApp Mail Server",
+    "permalink":"awesomeapp",
+    "organization":"atech"
+  },
+  "volume":904,
+  "limit":1000
+}
