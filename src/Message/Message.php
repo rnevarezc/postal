@@ -53,10 +53,8 @@ class Message
     public function __construct(array $data)
     {
         $this->id = $data['id'] ?? $this->id;
+        
         $this->token = $data['token'] ?? $this->token;
-
-        $this->setStatus($data['status']);
-        $this->setDetails($data['details']);
     }
 
     /**

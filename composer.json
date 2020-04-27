@@ -1,10 +1,13 @@
 {
     "name": "rnevarezc/postal",
-    "description": "Postal API Client",
+    "description": "A PHP lightweight Postal API Client",
     "type": "library",
     "keywords": [
         "postal",
-        "email"
+        "email",
+        "http",
+        "client",
+        "events"
     ],
     "require": {
         "php": "^7.2",
