@@ -54,4 +54,9 @@ trait HasMessages
     {
         return $this->messages;
     }
+
+    public function getMessageId()
+    {
+        return $this->messageId;
+    }
 }

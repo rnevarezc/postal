@@ -12,6 +12,6 @@ class DeliveryFailed implements MessageEvent
 
     public function getType(): string
     {
-        return static::DELAYED;
+        return static::DELIVERY_FAILED;
     }
 }
