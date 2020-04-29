@@ -13,7 +13,7 @@ trait HasMessage
      *
      * @var Message
      */
-    public $message;
+    protected $message;
 
     /**
      * @inheritDoc

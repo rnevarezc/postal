@@ -50,12 +50,22 @@ trait HasMessages
         $this->setMessages($data);
     }
 
-    public function getMessages()
+    /**
+     * Get the messages
+     *
+     * @return array
+     */
+    public function getMessages() : array
     {
         return $this->messages;
     }
 
-    public function getMessageId()
+    /**
+     * Get the associated message ID
+     *
+     * @return string
+     */
+    public function getMessageId() : string
     {
         return $this->messageId;
     }

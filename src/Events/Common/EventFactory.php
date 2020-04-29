@@ -15,7 +15,7 @@ abstract class EventFactory
      * receives a PSR-7 RequestInterface for a Postal Event Webhook
      *
      * @param array $data
-     * @return MessageEvent
+     * @return Event
      */
     public static function fromRequest(RequestInterface $request) : Event
     {
@@ -23,11 +23,33 @@ abstract class EventFactory
     }
 
     /**
-     * Default Constructor
+     * Get a new Event instance from a Payload
      * 
      * Event is created from a array type payload.
      *
      * @param array $payload
      */
-    abstract public static function fromPayload(array $payload) : Event;
+    public static function fromPayload(array $payload) : Event 
+    {
+        static::assertPayload($payload);
+        
+        return static::buildFromPayload($payload);
+    }
+
+    /**
+     * Assert the Payload is valid to Build an Event.
+     *
+     * @param array $payload
+     * @throws \Postal\Exceptions\InvalidEventPayloadException;
+     * @return void
+     */
+    abstract protected static function assertPayload(array $payload);
+
+    /**
+     * Build a new Event instance from a Payload
+     *
+     * @param array $payload
+     * @return Event
+     */
+    abstract protected static function buildFromPayload(array $payload) : Event ;
 }

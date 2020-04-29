@@ -11,7 +11,7 @@ trait HasServer
      *
      * @var array
      */
-    protected $server = [];
+    public $server = [];
 
     /**
      * @inheritDoc

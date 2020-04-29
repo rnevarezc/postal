@@ -6,6 +6,7 @@ namespace Postal\Events\Server;
 
 use Postal\Events\Common\{Event, EventFactory};
 use Postal\Events\Server\Concerns\HasServer;
+use Postal\Exceptions\InvalidEventPayloadException;
 
 abstract class SendLimit extends EventFactory implements Event 
 {
@@ -30,9 +31,21 @@ abstract class SendLimit extends EventFactory implements Event
     /**
      * @inheritDoc
      */
-    public static function fromPayload(array $payload): Event
+    protected static function buildFromPayload(array $payload): Event
     {
         return new static($payload);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected static function assertPayload(array $payload)
+    {
+        if (!isset($payload['server']) || !is_array($payload['server'])){
+            throw new InvalidEventPayloadException(
+                'Invalid Payload provided to build a valid SendLimit Event'
+            );
+        }
     }
 
     /**
@@ -53,5 +66,17 @@ abstract class SendLimit extends EventFactory implements Event
     public function getType(): string
     {
         return static::TYPE;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray() : array
+    {
+        return [
+            'server' => $this->server,
+            'volume' => $this->volume,
+            'limit' => $this->limit,
+        ];
     }
 }

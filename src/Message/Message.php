@@ -7,32 +7,54 @@ namespace Postal\Message;
 class Message
 {
     /**
-     * The ID of the message
-     *
-     * @var int
+     * @var int The ID of the message
      */
-    protected $id;
+    public $id;
 
     /**
-     * The unique token of the message
-     *
-     * @var string
+     * @var string The unique token of the message
      */
-    protected $token;
+    public $token;
 
     /**
-     * Status data
-     *
-     * @var array
+     * @var string Direction of the message: Incoming | Outgoing
      */
-    protected $status = [];
+    public $direction;
 
     /**
-     * Additional details
-     *
-     * @var array
+     * @var string The server message_id
      */
-    protected $details = [];
+    public $message_id;
+
+    /**
+     * @var string The recipient email address
+     */
+    public $to;
+
+    /**
+     * @var string The sender email address
+     */
+    public $from;
+
+    /**
+     * @var string The subject of the message
+     */
+    public $subject;
+
+    /**
+     * @var float The timestamp of the message
+     */
+    public $timestamp;
+
+    /**
+     * @var string Email Spam status: Spam | NotSpam
+     */
+    public $spam_status;
+
+    /**
+     * @var string The tag of the message
+     */
+    public $tag;
 
     /**
      * Get a new instance from an array of data
@@ -52,9 +74,13 @@ class Message
      */
     public function __construct(array $data)
     {
-        $this->id = $data['id'] ?? $this->id;
+        $attributes = array_keys(get_object_vars($this));
         
-        $this->token = $data['token'] ?? $this->token;
+        foreach ($data as $key => $value){
+            if ( in_array($key, $attributes) ){
+                $this->$key = $value;
+            }
+        }
     }
 
     /**
@@ -98,5 +124,12 @@ class Message
     {
         $this->details = is_array($data) ?: $this->details;
     }
-    
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return (array) $this;
+    }
 }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Postal\Events\Common;
 
-use JsonSerializable;
-
 interface Event
 {
     /**
@@ -21,4 +19,11 @@ interface Event
      * @return string
      */
     public function getType() : string;
+
+    /**
+     * Casts the event to an Array
+     * 
+     * @return array
+     */
+    public function toArray() : array ;
 }

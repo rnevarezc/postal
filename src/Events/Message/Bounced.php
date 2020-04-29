@@ -16,7 +16,7 @@ class Bounced implements MessageEvent
      *
      * @var Message
      */
-    public $bounce;
+    protected $bounce;
 
     public function __construct(array $payload)
     {
@@ -43,7 +43,7 @@ class Bounced implements MessageEvent
      */
     public function getBounce() : Message
     {
-        return $this->message;
+        return $this->bounce;
     }
 
     /**
@@ -52,5 +52,16 @@ class Bounced implements MessageEvent
     public function getType(): string
     {
         return static::BOUNCED;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray() : array
+    {
+        return [
+            'message' => (array) $this->message,
+            'bounce' => (array) $this->bounce,
+        ];
     }
 }

@@ -61,7 +61,7 @@ class Response implements JsonSerializable
     {
         $payload = json_decode((string) $response->getBody(), true);
 
-        $this->assert($payload);
+        $this->assertPayload($payload);
 
         $this->fill($payload);
 
@@ -88,7 +88,7 @@ class Response implements JsonSerializable
      * @throws Postal\Exceptions\InvalidRequestException
      * @return void
      */
-    protected function assert(array $payload)
+    protected function assertPayload(array $payload)
     {
         $status = $payload['status'];
 

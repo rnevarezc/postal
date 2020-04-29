@@ -29,21 +29,21 @@ class LinkClicked implements MessageEvent
      *
      * @var string
      */
-    protected $ipAddress;
+    protected $ip_address;
 
     /**
      * The user agent originating the Click Event
      *
      * @var string
      */
-    protected $userAgent;
+    protected $user_agent;
 
     public function __construct(array $payload)
     {
         $this->url = $payload['url'];
         $this->token = $payload['token'];
-        $this->ipAddress = $payload['ip_address'];
-        $this->userAgent = $payload['user_agent'];
+        $this->ip_address = $payload['ip_address'];
+        $this->user_agent = $payload['user_agent'];
 
         $this->setMessage($payload['message']);
     }
@@ -51,5 +51,18 @@ class LinkClicked implements MessageEvent
     public function getType(): string
     {
         return static::CLICKED;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray() : array
+    {
+        return [
+            'url' => $this->url,
+            'token' => $this->token,
+            'ip_address' => $this->ip_address,
+            'user_agent' => $this->user_agent,
+        ];
     }
 }

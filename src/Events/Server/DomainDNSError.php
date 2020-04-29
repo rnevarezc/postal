@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Postal\Events\Server;
 use Postal\Events\Common\{Event, EventFactory};
 use Postal\Events\Server\Concerns\HasServer;
+use Postal\Exceptions\InvalidEventPayloadException;
 
 class DomainDNSError extends EventFactory implements Event 
 {  
@@ -31,14 +32,34 @@ class DomainDNSError extends EventFactory implements Event
      *
      * @var float
      */
-    public $checkedAt;
+    public $dns_checked_at;
 
+    /**
+     * SPF Records
+     *
+     * @var array
+     */
     public $spf = [];
 
+    /**
+     * Dkim records
+     *
+     * @var array
+     */
     public $dkim = [];
 
+    /**
+     * MX records 
+     *
+     * @var array
+     */
     public $mx = [];
 
+    /**
+     * Return path records
+     *
+     * @var array
+     */
     public $return_path = [];
 
     /**
@@ -88,8 +109,28 @@ class DomainDNSError extends EventFactory implements Event
     /**
      * @inheritDoc
      */
-    public static function fromPayload(array $payload): Event
+    protected static function buildFromPayload(array $payload): Event
     {
         return new static($payload);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected static function assertPayload(array $payload)
+    {
+        if (!isset($payload['server']) || !is_array($payload['server'])){
+            throw new InvalidEventPayloadException(
+                'Invalid Payload provided to build a valid SendLimit Event'
+            );
+        }
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray() : array
+    {
+        return (array) $this;
     }
 }

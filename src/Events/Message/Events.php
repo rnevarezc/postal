@@ -6,17 +6,29 @@ namespace Postal\Events\Message;
 
 use Postal\Events\Common\Event;
 use Postal\Events\Common\EventFactory;
+use Postal\Exceptions\InvalidEventPayloadException;
 
 abstract class Events extends EventFactory
 {
     /**
-     * Create a Event from a Payload
-     *
-     * @param array $payload
+     * @inheritDoc
+     * 
+     * @return MessageEvent
      */
     public static function fromPayload(array $payload) : Event
     {
-         switch ($payload['status']){
+        return parent::fromPayload($payload);
+    }
+    
+    /**
+     * Create a Event from a Payload
+     *
+     * @param array $payload
+     * @return MessageEvent
+     */
+    protected static function buildFromPayload(array $payload) : MessageEvent
+    {
+        switch ($payload['status']){
             case MessageEvent::SENT:
                 $classname = MessageEvent::SENT;
             break;
@@ -36,8 +48,10 @@ abstract class Events extends EventFactory
             default:
                 if ( isset($payload['bounce'])){
                     $classname = MessageEvent::BOUNCED;
-                }elseif( isset($payload['token']) )
+                }elseif( isset($payload['token']) ){
                     $classname = MessageEvent::CLICKED;
+                }
+            break;
         }
 
         $event = static::getClass($classname);
@@ -54,10 +68,29 @@ abstract class Events extends EventFactory
      * Alias of static::fromPayload();
      *
      * @param array $payload
-     * @return Event
+     * @return MessageEvent
      */
     public static function get(array $payload) : Event
     {
         return static::fromPayload($payload);
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @param array $payload
+     * @return void
+     */
+    protected static function assertPayload(array $payload)
+    {
+        if ( 
+            empty($payload['status']) && 
+            empty($payload['bounce']) &&
+            empty($payload['token'])
+        ){
+            throw new InvalidEventPayloadException(
+                'Invalid Payload provided to build a Message Event'
+            );
+        }
     }
 }

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Postal\Events\Message\Concerns;
 
-use Postal\Message\Message;
-
 trait HasStatus
 {
+    use HasMessage;
+
     /**
      * Event Status
      *
@@ -41,7 +41,7 @@ trait HasStatus
      *
      * @var bool
      */
-    public $sentWithSSL;
+    public $sent_with_ssl;
 
     /**
      * Timestamp of the Message event.
@@ -49,13 +49,6 @@ trait HasStatus
      * @var float
      */
     public $timestamp;
-
-    /**
-     * The Message associated to the event
-     *
-     * @var Message
-     */
-    public $message;
 
     /**
      * @inheritDoc
@@ -72,16 +65,14 @@ trait HasStatus
     /**
      * @inheritDoc
      */
-    public function setMessage(array $data)
+    public function toArray() : array
     {
-        $this->message = Message::fromData($data);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getMessage() : Message
-    {
-        return $this->message;
+        return [
+            'status' => $this->status,
+            'details' => $this->details,
+            'time' => $this->time,
+            'sent_with_ssl' => $this->sent_with_ssl,
+            'timestamp' => $this->timestamp,
+        ];
     }
 }
