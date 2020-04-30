@@ -28,30 +28,24 @@ abstract class Events extends EventFactory
      */
     protected static function buildFromPayload(array $payload) : MessageEvent
     {
-        switch ($payload['status']){
-            case MessageEvent::SENT:
-                $classname = MessageEvent::SENT;
-            break;
-
-            case MessageEvent::DELAYED:
-                $classname = MessageEvent::DELAYED;
-            break;
-
-            case MessageEvent::DELIVERY_FAILED:
-                $classname = MessageEvent::DELIVERY_FAILED;
-            break;
-
-            case MessageEvent::HELD:
-                $classname = MessageEvent::HELD;
-            break;
-
-            default:
-                if ( isset($payload['bounce'])){
-                    $classname = MessageEvent::BOUNCED;
-                }elseif( isset($payload['token']) ){
-                    $classname = MessageEvent::CLICKED;
-                }
-            break;
+        if ( isset($payload['status']) ){
+            switch ($payload['status']){
+                case MessageEvent::SENT:
+                case MessageEvent::DELAYED:
+                case MessageEvent::DELIVERY_FAILED:
+                case MessageEvent::HELD:
+                    $classname = $payload['status'];
+                break;
+            }            
+        }elseif( isset($payload['bounce'])){
+            $classname = MessageEvent::BOUNCED;
+        }elseif( isset($payload['token']) ){
+            $classname = MessageEvent::CLICKED;
+        }else{
+            // This would be very strange indeed, but we should be prepared.
+            throw new InvalidEventPayloadException(
+                'Invalid Payload provided to build a Message Event'
+            );
         }
 
         $event = static::getClass($classname);
