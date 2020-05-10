@@ -15,28 +15,28 @@ class LinkClicked implements MessageEvent
      *
      * @var string
      */
-    protected $url;
+    public $url;
 
     /**
      * Unique token for the MessageLinkClicked
      *
      * @var string
      */
-    protected $token;
+    public $token;
 
     /**
      * The IP Address originating the Click Event
      *
      * @var string
      */
-    protected $ip_address;
+    public $ip_address;
 
     /**
      * The user agent originating the Click Event
      *
      * @var string
      */
-    protected $user_agent;
+    public $user_agent;
 
     public function __construct(array $payload)
     {
