@@ -48,6 +48,12 @@ abstract class Events extends EventFactory
             );
         }
 
+        if (!isset($classname)){
+            throw new InvalidEventPayloadException(
+                'Invalid Status in Payload provided to build a Message Event.'
+            );
+        }
+
         $event = static::getClass($classname);
         
         return new $event($payload);
