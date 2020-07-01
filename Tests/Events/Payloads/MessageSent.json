@@ -1,20 +1,25 @@
 {
-    "status":"Sent",
-    "details":"Message sent by SMTP to aspmx.l.google.com (2a00:1450:400c:c0b::1b) (from 2a00:67a0:a:15::2)",
-    "output":"250 2.0.0 OK 1477944899 ly2si31746747wjb.95 - gsmtp",
-    "time":0.22,
-    "sent_with_ssl":true,
-    "timestamp":1477945177.12994,
-    "message":{
-      "id":12345,
-      "token":"abcdef123",
-      "direction":"outgoing",
-      "message_id":"5817a64332f44_4ec93ff59e79d154565eb@app34.mail",
-      "to":"test@example.com",
-      "from":"sales@awesomeapp.com",
-      "subject":"Welcome to AwesomeApp",
-      "timestamp":1477945177.12994,
-      "spam_status":"NotSpam",
-      "tag":"welcome"
-    }
-  }
+  "event": "MessageSent",
+  "timestamp": 1593626440.5249448,
+  "payload": {
+    "message": {
+      "id": 153,
+      "token": "zQnfcOWttalu",
+      "direction": "outgoing",
+      "message_id": "9857ec6c-cf0e-4093-9a01-38e0f5f81b5d@rp.postal.funiber.org",
+      "to": "info@rnevarez.com",
+      "from": "noreply@notificaciones.funiber.org",
+      "subject": "Please confirm your email address",
+      "timestamp": 1593614286.649227,
+      "spam_status": "NotChecked",
+      "tag": null
+    },
+    "status": "Sent",
+    "details": "Message for info@rnevarez.com accepted by rnevarez.com (104.131.114.85) (from 176.28.114.76)",
+    "output": "250 2.0.0 Ok: queued as 7C7E8120A40\n",
+    "sent_with_ssl": false,
+    "timestamp": 1593626440.5160363,
+    "time": 0.54
+  },
+  "uuid": "5c471d45-2644-42eb-bff6-0354e3f7acaa"
+}

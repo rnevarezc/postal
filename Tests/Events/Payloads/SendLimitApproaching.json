@@ -1,10 +1,15 @@
 {
-  "server":{
-    "uuid":"54529725-8807-4069-ab29-a3746c1bbd98",
-    "name":"AwesomeApp Mail Server",
-    "permalink":"awesomeapp",
-    "organization":"atech"
+  "event":"SendLimitApproaching",
+  "timestamp":1593626440.5249448,
+  "payload":{
+    "server":{
+      "uuid":"54529725-8807-4069-ab29-a3746c1bbd98",
+      "name":"AwesomeApp Mail Server",
+      "permalink":"awesomeapp",
+      "organization":"atech"
+    },
+    "volume":904,
+    "limit":1000
   },
-  "volume":904,
-  "limit":1000
+  "uuid":"3c471d45-2644-42eb-bff6-0354e2f4acaa"
 }

@@ -1,19 +1,27 @@
 {
-  "domain":"example.com",
-  "uuid":"820b47a4-4dfd-42e4-ae6a-1e5bed5a33fd",
-  "dns_checked_at":1477945711.5502,
-  "spf_status":"OK",
-  "spf_error":null,
-  "dkim_status":"Invalid",
-  "dkim_error":"The DKIM record at example.com does not match the record we have provided. Please check it has been copied correctly.",
-  "mx_status":"Missing",
-  "mx_error":null,
-  "return_path_status":"OK",
-  "return_path_error":null,
-  "server":{
-    "uuid":"54529725-8807-4069-ab29-a3746c1bbd98",
-    "name":"AwesomeApp Mail Server",
-    "permalink":"awesomeapp",
-    "organization":"atech"
-  }
+  "event":"DomainDNSError",
+  "timestamp":1593626440.5249448,
+  "payload":{
+      "message":{
+        "domain":"example.com",
+        "uuid":"820b47a4-4dfd-42e4-ae6a-1e5bed5a33fd",
+        "dns_checked_at":1477945711.5502,
+        "spf_status":"OK",
+        "spf_error":null,
+        "dkim_status":"Invalid",
+        "dkim_error":"The DKIM record at example.com does not match the record we have provided. Please check it has been copied correctly.",
+        "mx_status":"Missing",
+        "mx_error":null,
+        "return_path_status":"OK",
+        "return_path_error":null,
+        "server":{
+          "uuid":"54529725-8807-4069-ab29-a3746c1bbd98",
+          "name":"AwesomeApp Mail Server",
+          "permalink":"awesomeapp",
+          "organization":"atech"
+        }
+      }
+  },
+  "uuid":"5c471d45-2644-42eb-bff6-0354e3f7acaa"
 }
+

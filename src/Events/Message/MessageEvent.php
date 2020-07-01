@@ -14,7 +14,7 @@ interface MessageEvent extends Event
     const DELIVERY_FAILED = 'DeliveryFailed';
     const HELD = 'Held';
     const BOUNCED = 'Bounced';
-    const CLICKED = 'LinkClicked';
+    const LINK_CLICKED = 'LinkClicked';
 
     /**
      * Get attributes for payload.
@@ -22,7 +22,7 @@ interface MessageEvent extends Event
      * @param array $query
      * @return array
      */
-    public function getMessage() : Message ;
+    public function getMessage(): Message;
 
     /**
      * Set the message
@@ -30,12 +30,12 @@ interface MessageEvent extends Event
      * @param array $message
      * @return void
      */
-    public function setMessage(array $message) ;
+    public function setMessage(array $message);
 
     /**
      * Get the message type
      *
      * @return string
      */
-    public function getType() : string;
+    public function getType(): string;
 }

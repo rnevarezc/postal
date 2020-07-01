@@ -33,7 +33,7 @@ abstract class SendLimit extends EventFactory implements Event
      */
     protected static function buildFromPayload(array $payload): Event
     {
-        return new static($payload);
+        return new static($payload['payload']);
     }
 
     /**
@@ -41,7 +41,7 @@ abstract class SendLimit extends EventFactory implements Event
      */
     protected static function assertPayload(array $payload)
     {
-        if (!isset($payload['server']) || !is_array($payload['server'])){
+        if (!isset($payload['event']) || !is_array($payload['payload'])){
             throw new InvalidEventPayloadException(
                 'Invalid Payload provided to build a valid SendLimit Event'
             );

@@ -25,9 +25,9 @@ abstract class EventFactory
     /**
      * Get a new Event instance from a Payload
      * 
-     * Event is created from a array type payload.
+     * Event is created from a array type event.
      *
-     * @param array $payload
+     * @param array $event
      */
     public static function fromPayload(array $payload) : Event 
     {

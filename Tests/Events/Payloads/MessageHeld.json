@@ -1,0 +1,25 @@
+{
+  "event": "MessageHeld",
+  "timestamp": 1593681228.0900302,
+  "payload": {
+    "message": {
+      "id": 161,
+      "token": "rsy5gwyg6Qrc",
+      "direction": "outgoing",
+      "message_id": "785f2bc3-0c56-4eeb-a7a6-c6b0bf65185a@rp.postal.funiber.org",
+      "to": "rafa3@rnevarez.com",
+      "from": "noreply@notificaciones.funiber.org",
+      "subject": "Please confirm your email address",
+      "timestamp": 1593681228.030935,
+      "spam_status": "NotChecked",
+      "tag": null
+    },
+    "status": "Held",
+    "details": "Credential is configured to hold all messages authenticated by it.",
+    "output": "",
+    "sent_with_ssl": null,
+    "timestamp": 1593681228.072894,
+    "time": null
+  },
+  "uuid": "7e6f81c1-d265-4ed7-be0a-951849b1d0db"
+}

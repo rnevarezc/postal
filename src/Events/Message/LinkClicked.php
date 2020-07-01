@@ -7,7 +7,7 @@ namespace Postal\Events\Message;
 use Postal\Events\Message\Concerns\HasMessage;
 
 class LinkClicked implements MessageEvent
-{  
+{
     use HasMessage;
 
     /**
@@ -50,13 +50,13 @@ class LinkClicked implements MessageEvent
 
     public function getType(): string
     {
-        return static::CLICKED;
+        return static::LINK_CLICKED;
     }
-    
+
     /**
      * @inheritDoc
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'url' => $this->url,

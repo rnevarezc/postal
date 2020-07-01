@@ -1,20 +1,24 @@
 {
-    "status":"DeliveryFailed",
-    "details":"Message sent by SMTP to aspmx.l.google.com (2a00:1450:400c:c0b::1b) (from 2a00:67a0:a:15::2)",
-    "output":"250 2.0.0 OK 1477944899 ly2si31746747wjb.95 - gsmtp",
-    "time":0.22,
-    "sent_with_ssl":true,
-    "timestamp":1477945177.12994,
-    "message":{
-      "id":12345,
-      "token":"abcdef123",
-      "direction":"outgoing",
-      "message_id":"5817a64332f44_4ec93ff59e79d154565eb@app34.mail",
-      "to":"test@example.com",
-      "from":"sales@awesomeapp.com",
-      "subject":"Welcome to AwesomeApp",
-      "timestamp":1477945177.12994,
-      "spam_status":"NotSpam",
-      "tag":"welcome"
-    }
+  "event":"MessageDeliveryFailed",
+  "timestamp":1593626440.5249448,
+  "payload":{
+    "message": {
+      "id": 155,
+      "token": "ggvnEThnFqXf",
+      "direction": "outgoing",
+      "message_id": "951894ef-3049-4389-b0c5-898ea689a55c@rp.postal.funiber.org",
+      "to": "lkjadlaksj@gmail.com",
+      "from": "noreply@notificaciones.funiber.org",
+      "subject": "Please confirm your email address",
+      "timestamp": 1593628176.436599,
+      "spam_status": "NotChecked",
+      "tag": null
+    },
+    "status": "HardFail",
+    "details": "Permanent SMTP delivery error when sending to gmail-smtp-in.l.google.com (173.194.76.27)",
+    "output": "550-5.1.1 The email account that you tried to reach does not exist. Please try\n550-5.1.1 double-checking the recipient's email address for typos or\n550-5.1.1 unnecessary spaces. Learn more at\n550 5.1.1  https://support.google.com/mail/?p=NoSuchUser z141si4229861wmc.37 - gsmtp\n",
+    "sent_with_ssl": false,
+    "timestamp": 1593628185.8995183,
+    "time": 0.06
   }
+}

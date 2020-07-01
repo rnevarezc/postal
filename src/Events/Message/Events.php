@@ -15,48 +15,31 @@ abstract class Events extends EventFactory
      * 
      * @return MessageEvent
      */
-    public static function fromPayload(array $payload) : Event
+    public static function fromPayload(array $payload): Event
     {
         return parent::fromPayload($payload);
     }
-    
+
     /**
      * Create a Event from a Payload
      *
      * @param array $payload
      * @return MessageEvent
      */
-    protected static function buildFromPayload(array $payload) : MessageEvent
+    protected static function buildFromPayload(array $payload): MessageEvent
     {
-        if ( isset($payload['status']) ){
-            switch ($payload['status']){
-                case MessageEvent::SENT:
-                case MessageEvent::DELAYED:
-                case MessageEvent::DELIVERY_FAILED:
-                case MessageEvent::HELD:
-                    $classname = $payload['status'];
-                break;
-            }            
-        }elseif( isset($payload['bounce'])){
-            $classname = MessageEvent::BOUNCED;
-        }elseif( isset($payload['token']) ){
-            $classname = MessageEvent::CLICKED;
-        }else{
+        // @version 1.0.3: The event is extracted directly from the Payload.
+        $event = static::getClass(str_replace('Message', '', $payload['event']));
+
+        if (!class_exists($event)) {
             // This would be very strange indeed, but we should be prepared.
+            // Maybe a weird payload was supplied.
             throw new InvalidEventPayloadException(
                 'Invalid Payload provided to build a Message Event'
             );
         }
 
-        if (!isset($classname)){
-            throw new InvalidEventPayloadException(
-                'Invalid Status in Payload provided to build a Message Event.'
-            );
-        }
-
-        $event = static::getClass($classname);
-        
-        return new $event($payload);
+        return new $event($payload['payload']);
     }
 
     protected static function getClass($classname)
@@ -70,7 +53,7 @@ abstract class Events extends EventFactory
      * @param array $payload
      * @return MessageEvent
      */
-    public static function get(array $payload) : Event
+    public static function get(array $payload): Event
     {
         return static::fromPayload($payload);
     }
@@ -83,11 +66,7 @@ abstract class Events extends EventFactory
      */
     protected static function assertPayload(array $payload)
     {
-        if ( 
-            empty($payload['status']) && 
-            empty($payload['bounce']) &&
-            empty($payload['token'])
-        ){
+        if (empty($payload['event'])) {
             throw new InvalidEventPayloadException(
                 'Invalid Payload provided to build a Message Event'
             );
