@@ -137,7 +137,7 @@ class Client
      * @param string $action
      * @param Mail $mail
      * @throws RequestException If something happened
-     * @return Response
+     * @return ResponseInterface
      */
     protected function performRequest(
         string $resource, 

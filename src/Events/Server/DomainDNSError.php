@@ -67,6 +67,8 @@ class DomainDNSError extends EventFactory implements Event
      */
     public function __construct(array $payload)
     {
+        $payload = $payload['message'];
+
         $this->domain = $payload['domain'];
 
         $this->uuid = $payload['uuid'];
