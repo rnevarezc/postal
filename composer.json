@@ -10,8 +10,8 @@
         "events"
     ],
     "require": {
-        "php": "^7.2",
-        "guzzlehttp/guzzle": "^6.5"
+        "php": "^7.2|^8.0",
+        "guzzlehttp/guzzle": "^7.0"
     },
     "license": "BSD-3-Clause",
     "authors": [
@@ -19,7 +19,7 @@
             "name": "Rafael Nevarez"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Postal\\": "src/"
